@@ -1,0 +1,82 @@
+# === Analisis Data Calon TNI ===
+import pandas as pd
+import numpy as np
+
+# === Data Calon TNI ===
+data = {
+    'nama': ['Andi','Budi','Citra','Dewi','Eka','Fajar','Gina','Hadi','Indah','Jilan'],
+    'alamat': [
+        'Jl. Merdeka No. 10','Jl. Sudirman No. 5','Jl. Thamrin No. 20',
+        'Jl. Gatot Subroto No. 15','Jl. Rasuna Said No. 8','Jl. Kuningan No. 12',
+        'Jl. Cikini No. 3','Jl. Palmerah No. 7','Jl. Senayan No. 9','Jl. Kuningan No. 2'
+    ],
+    'tinggi': [175,178,180,180,183,185,170,168,178,160]
+}
+
+df = pd.DataFrame(data)
+print("=== Data Calon TNI ===")
+print(df)
+print()
+
+# === Statistik Dasar Tinggi Badan ===
+print("=== Statistik Dasar Tinggi Badan ===")
+print(df['tinggi'].describe())
+print()
+
+mean_tinggi = df['tinggi'].mean()
+max_tinggi = df['tinggi'].max()
+min_tinggi = df['tinggi'].min()
+median_tinggi = df['tinggi'].median()
+
+print(f"Rata-rata tinggi : {mean_tinggi:.2f} cm")
+print(f"Tertinggi : {max_tinggi} cm")
+print(f"Terendah : {min_tinggi} cm")
+print(f"Median : {median_tinggi} cm")
+print()
+
+# === Calon di atas rata-rata tinggi ===
+print("=== Calon di atas rata-rata tinggi ===")
+atas_rata = df[df['tinggi'] > mean_tinggi]
+print(atas_rata)
+print()
+
+# === Urutan dari Tertinggi ke Terendah ===
+print("=== Urutan dari Tertinggi ke Terendah ===")
+urut_tinggi = df.sort_values(by='tinggi', ascending=False)
+print(urut_tinggi)
+print()
+
+# === Menambah kolom kategori tinggi ===
+def kategori_tinggi(x):
+    if x < 170:
+        return "Pendek"
+    elif 170 <= x < 180:
+        return "Sedang"
+    else:
+        return "Tinggi"
+
+df['kategori'] = df['tinggi'].apply(kategori_tinggi)
+
+print("=== Data dengan Kategori ===")
+print(df)
+print()
+
+# === Jumlah calon per kategori ===
+print("=== Jumlah Calon per Kategori ===")
+print(df['kategori'].value_counts())
+print()
+
+# === Statistik Lanjutan ===
+print("=== Statistik Lanjutan ===")
+std_tinggi = df['tinggi'].std()
+var_tinggi = df['tinggi'].var()
+print(f"Standar Deviasi : {std_tinggi:.2f}")
+print(f"Variansi : {var_tinggi:.2f}")
+print()
+
+# === Calon dengan Tinggi Badan Tertinggi ===
+print("=== Calon dengan Tinggi Badan Tertinggi ===")
+tertinggi = df[df['tinggi'] == max_tinggi].iloc[0]
+print(f"Nama : {tertinggi['nama']}")
+print(f"Alamat : {tertinggi['alamat']}")
+print(f"Tinggi : {tertinggi['tinggi']} cm")
