@@ -1,8 +1,6 @@
-# === Analisis Data Calon TNI ===
 import pandas as pd
 import numpy as np
 
-# === Data Calon TNI ===
 data = {
     'nama': ['Andi','Budi','Citra','Dewi','Eka','Fajar','Gina','Hadi','Indah','Jilan'],
     'alamat': [
@@ -18,7 +16,6 @@ print("=== Data Calon TNI ===")
 print(df)
 print()
 
-# === Statistik Dasar Tinggi Badan ===
 print("=== Statistik Dasar Tinggi Badan ===")
 print(df['tinggi'].describe())
 print()
@@ -34,19 +31,16 @@ print(f"Terendah : {min_tinggi} cm")
 print(f"Median : {median_tinggi} cm")
 print()
 
-# === Calon di atas rata-rata tinggi ===
 print("=== Calon di atas rata-rata tinggi ===")
 atas_rata = df[df['tinggi'] > mean_tinggi]
 print(atas_rata)
 print()
 
-# === Urutan dari Tertinggi ke Terendah ===
 print("=== Urutan dari Tertinggi ke Terendah ===")
 urut_tinggi = df.sort_values(by='tinggi', ascending=False)
 print(urut_tinggi)
 print()
 
-# === Menambah kolom kategori tinggi ===
 def kategori_tinggi(x):
     if x < 170:
         return "Pendek"
@@ -61,12 +55,10 @@ print("=== Data dengan Kategori ===")
 print(df)
 print()
 
-# === Jumlah calon per kategori ===
 print("=== Jumlah Calon per Kategori ===")
 print(df['kategori'].value_counts())
 print()
 
-# === Statistik Lanjutan ===
 print("=== Statistik Lanjutan ===")
 std_tinggi = df['tinggi'].std()
 var_tinggi = df['tinggi'].var()
@@ -74,7 +66,6 @@ print(f"Standar Deviasi : {std_tinggi:.2f}")
 print(f"Variansi : {var_tinggi:.2f}")
 print()
 
-# === Calon dengan Tinggi Badan Tertinggi ===
 print("=== Calon dengan Tinggi Badan Tertinggi ===")
 tertinggi = df[df['tinggi'] == max_tinggi].iloc[0]
 print(f"Nama : {tertinggi['nama']}")
